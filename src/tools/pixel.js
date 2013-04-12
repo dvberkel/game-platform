@@ -1,5 +1,6 @@
 /*global platform:true*/
 (function(platform){
+    "use strict";
     platform.tools = platform.tools || {};
 
     var PixelViewer = function(){};

@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         generate : {
             platform : {
                 file : 'src/<%= pkg.name %>.js',
-                content : 'platform = (function(){ return { version: "<%= pkg.version %>" }; })();'
+                content : '/*global platform:true*/platform = (function(){ return { version: "<%= pkg.version %>" }; })();'
             }
         },
         jasmine: {
@@ -61,6 +61,12 @@ module.exports = function(grunt) {
             },
             gruntfile: {
                 src: 'Gruntfile.js'
+            },
+            source: {
+                src: ['src/**/*.js']
+            },
+            spec: {
+                src: ['spec/**/*.js']
             }
         },
         watch: {

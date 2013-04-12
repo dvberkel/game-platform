@@ -1,1 +1,1 @@
-platform = (function(){ return { version: "0.0.0" }; })();
+/*global platform:true*/platform = (function(){ return { version: "0.0.0" }; })();

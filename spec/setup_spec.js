@@ -1,3 +1,4 @@
+/*jshint strict: true, globalstrict:true*/
 /*globals describe:false, it:false, expect:false*/
 "use strict";
 

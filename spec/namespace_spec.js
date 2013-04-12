@@ -1,4 +1,5 @@
-/*globals describe:false, it:false, expect:false, platform: false*/
+/*jshint strict: true, globalstrict:true*/
+/*global describe:false, it:false, expect:false, platform: false*/
 "use strict";
 
 describe("platform namespace", function(){
