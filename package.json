@@ -1,0 +1,20 @@
+{
+  "name": "game-platform",
+  "version": "0.0.0",
+  "description": "An exploration into tools for game creation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dvberkel/game-platform.git"
+  },
+  "keywords": [
+    "game",
+    "html"
+  ],
+  "author": "dvberkel",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
