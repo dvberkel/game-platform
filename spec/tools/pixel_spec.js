@@ -16,4 +16,12 @@ describe("platform.tools.PixelViewer", function(){
     it("should be a constructor", function(){
         expect(platform.tools.PixelViewer instanceof Function).toBeTruthy();
     });
+
+    describe("upon construction", function(){
+        it("should create a .pixel.container", function(){
+            platform.tools.PixelViewer();
+
+            expect(document.querySelector(".pixel.container")).not.toBe(null);
+        });
+    });
 });
