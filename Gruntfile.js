@@ -73,7 +73,11 @@ module.exports = function(grunt) {
             gruntfile: {
                 files: '<%= jshint.gruntfile.src %>',
                 tasks: ['jshint:gruntfile']
-            }
+            },
+	    tdd: {
+		files: ['<%= jshint.source.src %>', '<%= jshint.spec.src %>'],
+		tasks: ['jasmine']
+	    }
         }
     });
 
