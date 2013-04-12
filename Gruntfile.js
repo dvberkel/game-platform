@@ -1,78 +1,88 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
-  // Project configuration.
-  grunt.initConfig({
-    // Metadata.
-    pkg: grunt.file.readJSON('package.json'),
-    banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
-    // Task configuration.
-    jasmine: {
-      src: ['src/**/*.js'],
-      options: {
-        specs: 'spec/**/*_spec.js'
-      }
-    },
-    concat: {
-      options: {
-        banner: '<%= banner %>',
-        stripBanners: true
-      },
-      dist: {
-        src: ['src/<%= pkg.name %>.js'],
-        dest: 'dist/<%= pkg.name %>.js'
-      }
-    },
-    uglify: {
-      options: {
-        banner: '<%= banner %>'
-      },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
-      }
-    },
-    jshint: {
-      options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        unused: true,
-        boss: true,
-        eqnull: true,
-        browser: true,
-        globals: {
+    // Project configuration.
+    grunt.initConfig({
+        // Metadata.
+        pkg: grunt.file.readJSON('package.json'),
+        banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+            ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+        // Task configuration.
+        generate : {
+            platform : {
+                file : 'src/<%= pkg.name %>.js',
+                content : 'platform = (function(){ return { version: "<%= pkg.version %>" }; })();'
+            }
+        },
+        jasmine: {
+            src: ['src/**/*.js'],
+            options: {
+                specs: 'spec/**/*_spec.js'
+            }
+        },
+        concat: {
+            options: {
+                banner: '<%= banner %>',
+                stripBanners: true
+            },
+            dist: {
+                src: ['src/<%= pkg.name %>.js'],
+                dest: 'dist/<%= pkg.name %>.js'
+            }
+        },
+        uglify: {
+            options: {
+                banner: '<%= banner %>'
+            },
+            dist: {
+                src: '<%= concat.dist.dest %>',
+                dest: 'dist/<%= pkg.name %>.min.js'
+            }
+        },
+        jshint: {
+            options: {
+                curly: true,
+                eqeqeq: true,
+                immed: true,
+                latedef: true,
+                newcap: true,
+                noarg: true,
+                sub: true,
+                undef: true,
+                unused: true,
+                boss: true,
+                eqnull: true,
+                browser: true,
+                globals: {
+                }
+            },
+            gruntfile: {
+                src: 'Gruntfile.js'
+            }
+        },
+        watch: {
+            gruntfile: {
+                files: '<%= jshint.gruntfile.src %>',
+                tasks: ['jshint:gruntfile']
+            }
         }
-      },
-      gruntfile: {
-        src: 'Gruntfile.js'
-      }
-    },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      }
-    }
-  });
+    });
 
-  // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
+    // These plugins provide necessary tasks.
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-  // Default task.
-  grunt.registerTask('default', ['jshint', 'jasmine', 'concat', 'uglify']);
+    grunt.registerMultiTask('generate', function(){
+        grunt.file.write(this.data.file, this.data.content);
+    });
+
+    // Default task.
+    grunt.registerTask('default', ['generate', 'jshint', 'jasmine', 'concat', 'uglify']);
 
 };
