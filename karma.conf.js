@@ -10,6 +10,9 @@ basePath = '';
 files = [
     JASMINE,
     JASMINE_ADAPTER,
+    'spec/**/*.js',
+    'src/game-platform.js',
+    'src/tools/pixel.js'
 ];
 
 

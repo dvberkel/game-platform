@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             }
         },
         jasmine: {
-            src: ['src/**/*.js'],
+            src: ['src/<%= pkg.name %>.js', 'src/tools/pixel.js'],
             options: {
                 specs: 'spec/**/*_spec.js'
             }
