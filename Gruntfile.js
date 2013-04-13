@@ -23,6 +23,11 @@ module.exports = function(grunt) {
                 specs: 'spec/**/*_spec.js'
             }
         },
+	karma: {
+	    unit: {
+		configFile: 'karma.conf.js'
+	    }
+	},
         concat: {
             options: {
                 banner: '<%= banner %>',
@@ -87,6 +92,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerMultiTask('generate', function(){
         grunt.file.write(this.data.file, this.data.content);
